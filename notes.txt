@@ -1,0 +1,60 @@
+Step 1
+(djangoPy3Env) > cd python_stack/django/django_intro
+(djangoPy3Env) django_intro> django-admin startproject your_project_name_here
+(djangoPy3Env) django_intro> cd your_project_name_here
+(djangoPy3Env) your_project_name_here> python manage.py runserver
+
+Step 2 
+Create a folder for our project's apps
+(djangoPy3Env) your_project_name_here> mkdir apps  // here all your apps will be , like login app, signing up app...
+(djangoPy3Env) apps> python ../manage.py startapp your_app_name_here // you need to add your app each time is created to the rout
+apps> cd app_name   // then you go to your app (Helloword)
+(djangoPy3Env) your_app_name_here> touch urls.py // You a files over there 
+
+Step 3 
+our_project_name_here/your_project_name_here/settings.py
+
+   INSTALLED_APPS = [
+       'apps.your_app_name_here', # added this line. Don't forget the comma!! // Change this line only 
+       'django.contrib.admin',
+       'django.contrib.auth',
+       'django.contrib.contenttypes',
+       'django.contrib.sessions',
+       'django.contrib.messages',
+       'django.contrib.staticfiles',
+   ]    # the trailing comma after the last item in a list, tuple, or dictionary is commonly accepted in Python
+
+Step 4
+your_project_name_here/your_project_name_here/urls.py
+
+from django.conf.urls import url, include	# added an import! // follow
+# from django.contrib import admin              # comment out, or just delete // delete 
+urlpatterns = [
+    url(r'^', include('apps.your_app_name_here.urls')),	# use your app_name here //follow
+    # url(r'^admin/', admin.sites.urls)         # comment out, or just delete // delete
+]
+
+Step 5
+1.
+your_project_name_here/apps/your_app_name_here/urls.py       // make sure it looks like this !!!
+from django.conf.urls import url
+from . import views
+                    
+urlpatterns = [
+    url(r'^$', views.index),
+]
+
+2.
+from django.shortcuts import render, HttpResponse
+def index(request):
+    return HttpResponse("this is the equivalent of @app.route('/')!")
+
+Step 6
+Check if it's working
+(djangoPy3Env) your_project_name_here> python manage.py runserver
+
+
+
+
+
+ 
